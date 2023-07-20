@@ -35,14 +35,14 @@ export default function Footer() {
                   <input
                       type="email"
                       placeholder="john@example.com"
-                      className={`bg-white place-self-center text-center ${context?.darkMode && 'dark-card'} ${context?.darkMode&&context.readMode && "night-hawk"} ${context?.roundedCorners && 'rounded-xl'} w-full dark:text-white placeholder:text-white/9 p-2 h-[3rem]
+                      className={`place-self-center text-center ${context?.darkMode && 'dark-card'} ${context?.darkMode&&context.readMode && "night-hawk"} ${context?.roundedCorners && 'rounded-xl'} w-full dark:text-white placeholder:text-white/9 p-2 h-[3rem]
                    font-bold focus:outline-none bg-transparent  border-transparent  placeholder:text-black dark:placeholder:text-white`}
                   /></motion.span>
          <div className="flex justify-center">
 
              <motion.button
                  whileTap={{scale: 0.9}} onClick={handleSubscribe}
-                 className={`font-pirata font-bold place-self-center md:p-2 text-center mx-auto px-2 my-2 border-4 bg-transparent border-white h-10  w-fit   ${context?.darkMode && 'dark-card ring-blue-600 bl shadow-xl'} ${context?.darkMode&&context.readMode && "night-hawk shadow-2xl"} w-full ${context?.roundedCorners && 'rounded-xl'}`}  >
+                 className={`font-pirata font-bold place-self-center md:p-2 text-center mx-auto px-2 my-2 border-4 bg-transparent ${!context?.glassy&& !context?.darkMode &&'border-gray-600' }   w-fit   ${context?.darkMode && 'dark-card ring-blue-600 bl shadow-xl'} ${context?.darkMode&&context.readMode && "night-hawk shadow-2xl"} w-full ${context?.roundedCorners && 'rounded-xl'}`}  >
                 <span className="text-blue-500">S</span>ubscribe
          </motion.button>
          </div>
