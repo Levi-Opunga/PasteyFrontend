@@ -118,7 +118,7 @@ export default function Home() {
                 </>
             }
 
-            {!context?.readMode && context?.notes?.length! >0 && <div className={` 2xl:mt-20 gap-8   w-[100%]  ${grids[context!.itemsPerRow]}  grid  `}>  {
+            {!context?.readMode && <div className={` 2xl:mt-20 gap-8   w-[100%]  ${grids[context!.itemsPerRow]}  grid  `}>  {
                 context?.notes.map((item, index) => {
                     return (
                         <motion.div
@@ -162,7 +162,7 @@ export default function Home() {
                 })
             }
             </div>}
-            {context?.readMode && context?.notes?.length! &&
+            {context?.readMode &&
                 <div className={` 2xl:mt-20 gap-8   w-[80%] ${grids[context!.itemsPerRow]} grid `}>  {
                     context.notes.map((item, index) => {
                         return (
