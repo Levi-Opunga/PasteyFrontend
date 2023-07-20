@@ -160,7 +160,7 @@ export function NoteForm({className, closeAction, poppedup = true}: {
             createNote({
                 text: text,
                 id: Math.random()*10000000,
-                date: new Date().toLocaleString(),
+                date: new Date().toISOString(),
                 hidden: hidden === "true",
             }).then(() => {
                 setText("");
