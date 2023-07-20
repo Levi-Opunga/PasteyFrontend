@@ -8,7 +8,7 @@ import {IoMdClose} from "react-icons/io";
 import {BiCopy, BiCross} from "react-icons/bi";
 import useCopy from "use-copy";
 import {MdOutlineModeEditOutline} from "react-icons/md";
-import {updateNoteById} from "@/components/ServerFunctions";
+import {deleteNoteById, updateNoteById} from "@/components/ServerFunctions";
 
 const backgrounds = [
     "bg-yellow-500/20",
@@ -179,6 +179,12 @@ export function Card({text,id, date, className, closeAction, poppedup = false, h
         setEdit(!editing)
     }
 
+    const deleteNote = () => {
+        context?.setNotes(context!.notes.filter(item => item.id !== id))
+        deleteNoteById(id)
+        context?.openModal("Note Deleted")
+
+    };
     return (
         <div
             className={`border-[10px]  ${roundedxxxl} ${context?.glassy ? colors.border : context?.readMode && "border-gray-700"}  ${context?.readMode && reset } ${ double_border} ${context?.readMode && context.darkMode && context.roundedCorners && 'rounded-xl'} ${context?.readMode && context.darkMode && 'dark-card'} ${context?.glassy && context.darkMode && "shadow  shadow-blue-950 "}  `}>
@@ -187,8 +193,10 @@ export function Card({text,id, date, className, closeAction, poppedup = false, h
 
                 <div className="relative  overflow-ellipsis flex justify-between p-2">
                     <motion.h1 className="underline-offset-4 text-base ">{`${year}-${month}-${day}`}</motion.h1>
-                    <span onClick={closeAction} className="text-gray-600 select-none text-3xl">{poppedup ?
-                        <IoMdClose className={"fill-red-600 dark:fill-amber-50"} /> : <AiOutlineDelete className={"fill-red-600 dark:fill-amber-50"}/>}</span>
+                    <span  className="text-gray-600 select-none text-3xl">{poppedup ?
+                        <IoMdClose onClick={closeAction} className={"fill-red-600 dark:fill-amber-50"} /> : <AiOutlineDelete
+                            onClick={deleteNote}
+                            className={"fill-red-600 dark:fill-amber-50"}/>}</span>
                 </div>
                 <div className={`h-32 ${poppedup && 'h-56'} `}>
                     {!editing ?
