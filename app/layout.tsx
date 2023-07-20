@@ -1,6 +1,7 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import {AppWrapper} from "@/app/AppContext";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -15,8 +16,13 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+
+    <html className="dark  " lang="en">
+    <AppWrapper>
+
+      <body className={inter.className +" dark:bg-[#0B132B] " }>{children}</body>
+    </AppWrapper>
+
     </html>
   )
 }
