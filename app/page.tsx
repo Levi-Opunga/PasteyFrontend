@@ -10,59 +10,7 @@ import {deleteNoteById, ServerElement} from "@/components/ServerFunctions";
 import Footer from "@/components/footer";
 import {NoteForm} from "@/components/NoteForm";
 
-const data = [
-    {
-        text: "Pastey",
-        date: new Date(),
-        hidden: true
-    },
-    {
-        text: " lorem ipsum dolor lorwwsk sjsksk sjsjqehdhqe ebf2l3uieil iqenda enqklrn edonqwd n 3qjrn2iln qaq3bne ej21lqnewknqk23q wen2lnn3e 3nlr24rkkesdf 3onrek sit amet, consectetur adipisicing elit. Accusamus accusantium ad adipisci",
-        date: new Date()
-    }, {
-        text: " lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus accusantium ad adipisci",
-        date: new Date(),
-        hidden: true
 
-    }
-    , {
-        text: " lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus accusantium ad adipisci",
-
-        date: new Date()
-    }
-    , {
-        text: " lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus accusantium ad adipisci",
-        date: new Date()
-    }
-    , {
-        text: " lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus accusantium ad adipisci",
-        date: new Date()
-    }, {
-        text: " lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus accusantium ad adipisci",
-
-        date: new Date()
-    }
-    , {
-        text: " lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus accusantium ad adipisci",
-        date: new Date()
-    }
-    , {
-        text: " lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus accusantium ad adipisci",
-        date: new Date()
-    }, {
-        text: " lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus accusantium ad adipisci",
-
-        date: new Date()
-    }
-    , {
-        text: " lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus accusantium ad adipisci",
-        date: new Date()
-    }
-    , {
-        text: " lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus accusantium ad adipisci",
-        date: new Date()
-    }
-]
 
 export default function Home() {
     const context = useContext(AppContext);
