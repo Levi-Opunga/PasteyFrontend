@@ -114,7 +114,7 @@ export function Card({text,id, date, className, closeAction, poppedup = false, h
     let month = dateCreated.getMonth();
 
     let year = dateCreated.getFullYear();
-    let reset = 'bg-gray-100/50 dark:bg-[#0d1426] shadow-2xl dark:border-cyan-400 bg-white dark:border-[.5px]'
+    let reset = 'bg-gray-100/50 dark:bg-[#0d1426] shadow-2xl dark:border-cyan-400 bg-white dark:border-[.5px] '
     let double_border = context?.dualBorder && 'border-double dark:border-double dark:border-gray-400/70 '
     let btn_double_border = context?.dualBorder ? 'border-double' : 'border-none'
     let button_reset = context?.dualBorder && 'border-[5px]'
@@ -203,7 +203,7 @@ export function Card({text,id, date, className, closeAction, poppedup = false, h
                         <p className={`md:text-xl text-base line-clamp-4 ${poppedup && "line-clamp-6 md:h-56"}`}>{editText}</p> :
                         <textarea value={editText} onInput={handleInputChange}
                                   ref={ref}
-                                  className={`dark:bg-black bg-inherit h-full w-full focus:outline-none border-2 p-2 border-amber-50 ${roundedxl} ${poppedup && "text-green-600 md:h-52"}`}></textarea>}
+                                  className={`dark:bg-black bg-inherit h-full w-full focus:outline-none border-2 p-2 border-amber-50 ${roundedxl} ${poppedup && "text-green-600 md:h-52"} `}></textarea>}
                 </div>
                 <div className="flex flex-row gap-3 text-base justify-between mb-3">
                     <button

@@ -6,6 +6,7 @@ import {randomBackground} from "@/components/Card";
 import {getAllNotes} from "@/components/ServerFunctions";
 
 interface User {
+
 }
 
 interface Context {

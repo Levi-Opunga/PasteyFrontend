@@ -18,10 +18,10 @@ export const Logo = ({className,fill,size="20"}:{className:string,fill?:string,s
                                     <g>
                                         <path xmlns="http://www.w3.org/2000/svg"
                                               d="M55.039 247.2l99.326-172.038v126.306h86.79l0-126.306 99.326 172.038zM197.76 0l26.403 45.732-52.806 0z"
-                                              fill={fill} fill-rule="nonzero" stroke="none" stroke-width="1"
-                                              stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10"
-                                              stroke-dasharray="" stroke-dashoffset="0" font-family="none"
-                                              font-weight="none" font-size="none" text-anchor="none"
+                                              fill={fill} fillRule="nonzero" stroke="none" strokeWidth="1"
+                                              strokeLinecap="butt" strokeLinejoin="miter" strokeMiterlimit="10"
+                                              strokeDasharray="" strokeDashoffset="0" fontFamily="none"
+                                              fontWeight="none" fontSize="none" textAnchor="none"
                                               style={{mixBlendMode:"normal"}} data-fill-palette-color="tertiary"></path>
                                     </g>
                                     <g transform="matrix(1,0,0,1,176.6132749578087,67.97999999999999)">
@@ -41,8 +41,8 @@ export const Logo = ({className,fill,size="20"}:{className:string,fill?:string,s
                                                                         <rect width="66.18701412118286"
                                                                               height="9.969741858841978" x="0"
                                                                               y="122.29699710491856" fill={fill}
-                                                                              opacity="1" stroke-width="0"
-                                                                              stroke="transparent" fill-opacity="1"
+                                                                              opacity="1" strokeWidth="0"
+                                                                              stroke="transparent" fillOpacity="1"
                                                                               className="rect-o-0"
                                                                               data-fill-palette-color="primary" rx="1%"
                                                                               id="o-0"

@@ -181,30 +181,30 @@ export function NoteForm({className, closeAction, poppedup = true}: {
     return (
         <form onSubmit={onSubmit} className={className}>
             <div
-                className={`border-[10px] select-none w-[100%]  ${roundedxxxl} ${context?.glassy ? colors.border : context?.readMode && "border-gray-700"}  ${context?.readMode && reset} ${double_border} ${context?.readMode && context.darkMode && context.roundedCorners && 'rounded-xl'} ${context?.readMode && context.darkMode && 'dark-card'} ${context?.glassy && context.darkMode && "shadow drop-shadow-2xl shadow-blue-950 "} `}>
+                className={`border-[10px] select-none w-[100%]  ${roundedxxxl} ${context?.glassy ? colors.border : context?.readMode && "border-gray-700"}   ${context?.readMode && reset} ${double_border} ${context?.readMode && context.darkMode && context.roundedCorners && 'rounded-xl'} ${context?.readMode && context.darkMode && 'dark-card'} ${context?.glassy && context.darkMode && "shadow drop-shadow-2xl shadow-blue-950 "} ${context?.glassy&& !context?.darkMode && "text-gray-200" }  `}>
                 <motion.div
-                    className={`w-full dark:text-gray-200 p-6 w-[100%]   ${context?.glassy && colors.border + glassy}  dark:border-none  text-gray-700 ${roundedtxxl}  h-fit ${poppedup && "md:h-96"}  shadow-2xl dark:text-white  ${colors.light} dark:bg-[#0d1426]/80 ${className} ${context?.readMode && reset} `}>
+                    className={`w-full dark:text-gray-200 p-6 w-[100%]   ${context?.glassy && colors.border + glassy}  dark:border-none   ${roundedtxxl}  h-fit ${poppedup && "md:h-96"}  shadow-2xl dark:text-white  ${colors.light} dark:bg-[#0d1426]/80 ${className} ${context?.readMode && reset} `}>
 
                     <div className="relative  overflow-ellipsis flex justify-between p-2">
-                        <motion.h1 className="underline-offset-4 text-base text-white ">Enter New Clip</motion.h1>
+                        <motion.h1 className="underline-offset-4 text-base  ">Enter New Clip</motion.h1>
                         <span onClick={(event) => {
                             event.preventDefault();
                             closeAction && closeAction()
                         }}
-                              className="text-gray-600 select-none text-3xl">
+                              className=" select-none text-3xl">
                         <IoMdClose className={`${!context?.darkMode && 'fill-red-500'}`}/> </span>
                     </div>
                     <div className={`h-32 ${poppedup && 'h-52'} `}>
                         <textarea value={text} onInput={handleInputChange}
                                   ref={ref}
-                                  className={`dark:bg-black text-white bg-inherit h-full w-full focus:outline-none border-2 p-2 ${context?.glassy && !context.darkMode ? colors.border : 'border-gray-700/80'} ${roundedxl} ${context?.darkMode && "text-green-600 md:h-52"}`}></textarea>
+                                  className={`dark:bg-black bg-inherit h-full w-full focus:outline-none border-2 p-2 ${context?.glassy && !context.darkMode ? colors.border : 'border-gray-700/80'} ${roundedxl} ${context?.darkMode && "text-green-600 md:h-52"}`}></textarea>
                     </div>
                     <div>
-                        <label className="text-white pl-3.5 relative">
-                            <input name="hidden" type="checkbox" onInput={toggleHidden} value={hidden} className="text-white opacity-0 bg-none rounded-xl focus:outline-none h-5 mt-3 mr-2 w-5 "/>
+                        <label className="pl-3.5 relative">
+                            <input name="hidden" type="checkbox" onInput={toggleHidden} value={hidden} className=" opacity-0 bg-none rounded-xl focus:outline-none h-5 mt-3 mr-2 w-5 "/>
 
                                 <span className={ `absolute ${hidden=='true' ? colors.checked+ " border-4 " + colors.deep: colors.light} rounded left-3.5 -top-1 h-5 w-5`}></span>
-                            <span className="absolute text-sm font-bold bottom-[3px]">Hidden</span>
+                            <span className="absolute text-sm font-bold bottom-[3px] ">Hidden</span>
                         </label>
                     </div>
                     <div className="flex flex-row gap-3 text-base justify-between mb-3">
