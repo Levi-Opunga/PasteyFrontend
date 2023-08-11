@@ -3,7 +3,7 @@ type Note = {
     date: string;
     id: number;
     hidden: boolean;
-
+    title: string;
 }
 
 type CustomResponseMessage = {

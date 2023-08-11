@@ -32,9 +32,10 @@ export function ToolBar() {
         }
     }
 
+
     return <motion.div
         transition={{duration: .5}}
-        className={`fixed ${toggleitems ? 'right-[46%]' : 'right-6'} md:right-6 top-[47%] bg-gray-400/60 p-1 rounded-2xl md:top-6 z-40`}>
+        className={`fixed ${toggleitems ? 'right-[46%]' : 'right-6'} md:right-6 top-[47%] bg-gray-400/60 p-1 rounded-2xl md:top-6 z-40 scale-90`}>
         <motion.div
             whileTap={{scale: 1.3, translateX: 10, rotate: 360}}
             transition={{duration: 1.1}}

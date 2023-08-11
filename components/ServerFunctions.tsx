@@ -54,6 +54,7 @@ export async function getNoteByText(text:string):Promise<Note> {
 export  async function getAllNotes():Promise<Note[]> {
     const res = await fetch(environment.BASE_URL + "/note",{
         cache: "no-cache"
-    });
-    return await res.json();
+    }).then(res=>res);
+
+    return await res.json() ;
 }

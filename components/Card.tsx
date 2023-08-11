@@ -99,15 +99,17 @@ const backgrounds_border = [
     "border-rose-500/50"
 ]
 
-export function Card({text,id, date, className, closeAction, poppedup = false, hidden}: {
-    text: string, id:number,date: string, className?: string, closeAction?: () => void, poppedup?: boolean, hidden?: boolean
+export function Card({text, title, id, date, className, closeAction, poppedup = false, hidden}: {
+    text: string, title: string, id: number, date: string, className?: string, closeAction?: () => void, poppedup?: boolean, hidden?: boolean
 }) {
     const context = useContext(AppContext);
     const [editText, setEditText] = useState(text);
+    const [editTitle, setEditTitle] = useState(title);
     const [editing, setEdit] = useState(false);
     const ref = useRef(null);
     const [copied, copy, setCopied] = useCopy(editText);
     let dateCreated = new Date(date);
+    let daysAgo = Math.floor((new Date().getTime() - dateCreated.getTime()) / (1000 * 3600 * 24));
 
     let day = dateCreated.getDate();
 
@@ -118,7 +120,7 @@ export function Card({text,id, date, className, closeAction, poppedup = false, h
     let double_border = context?.dualBorder && 'border-double dark:border-double dark:border-gray-400/70 '
     let btn_double_border = context?.dualBorder ? 'border-double' : 'border-none'
     let button_reset = context?.dualBorder && 'border-[5px]'
-    let glassy = "border-gradient-purple " + context?.darkMode? "": "shadow-violet-500/60"
+    let glassy = "border-gradient-purple " + context?.darkMode ? "" : "shadow-violet-500/60"
     let roundedlg = context?.roundedCorners && "rounded-lg";
     let roundedxl = context?.roundedCorners && " rounded-xl"
     let roundedtxxl = context?.roundedCorners && "rounded-xl"
@@ -160,20 +162,21 @@ export function Card({text,id, date, className, closeAction, poppedup = false, h
         textChange(event);
     }, []);
 
-   async function updateNote() {
+    async function updateNote() {
 
-        context!.notes.filter(item=>item.id===id)[0].text = editText;
+        context!.notes.filter(item => item.id === id)[0].text = editText;
+        context!.notes.filter(item => item.id === id)[0].title = editTitle;
         context?.setNotes(context!.notes)
 
-       await updateNoteById(id, {
+        await updateNoteById(id, {
             text: editText,
             date: date,
             id: id,
+            title: editTitle,
             hidden: hidden!,
         })
 
         context?.openModal("Note Updated")
-
 
 
         setEdit(!editing)
@@ -185,16 +188,33 @@ export function Card({text,id, date, className, closeAction, poppedup = false, h
         context?.openModal("Note Deleted")
 
     };
+
+    function handleTitleChange(event: React.ChangeEvent<HTMLInputElement>) {
+        event.preventDefault()
+        setEditTitle(event.target.value)
+    }
+
+
     return (
         <div
-            className={`mx-[7%] w-[86%] md:mx-0 md:w-full border-[10px]  ${roundedxxxl} ${context?.glassy ? colors.border : context?.readMode && "border-gray-700"}  ${context?.readMode && reset } ${ double_border} ${context?.readMode && context.darkMode && context.roundedCorners && 'rounded-xl'} ${context?.readMode && context.darkMode && 'dark-card'} ${context?.glassy && context.darkMode && "shadow  shadow-blue-950 "}  `}>
+            className={`mx-[7%] w-[86%] md:mx-0 md:w-full border-[10px]  ${roundedxxxl} ${context?.glassy ? colors.border : context?.readMode && "border-gray-700"}  ${context?.readMode && reset} ${double_border} ${context?.readMode && context.darkMode && context.roundedCorners && 'rounded-xl'} ${context?.readMode && context.darkMode && 'dark-card'} ${context?.glassy && context.darkMode && "shadow  shadow-blue-950 "}  `}>
             <motion.div
-                className={`  w-full dark:text-gray-200 p-6  ${context?.glassy &&  colors.border + glassy}  dark:border-none  text-gray-700 ${roundedtxxl}  h-72 ${poppedup && "h-fit md:h-96"} ${hidden && context?.hideHidden && 'blur'}  shadow-2xl dark:text-white ${!context?.readMode && "text-white"}  ${colors.light} dark:bg-[#0d1426]/40 ${className} ${context?.readMode && reset}  `}>
+                className={`  w-full dark:text-gray-200 p-6  ${context?.glassy && colors.border + glassy}  dark:border-none  text-gray-700 ${roundedtxxl}  h-72 ${poppedup && "h-fit md:h-96"} ${hidden && context?.hideHidden && 'blur'}  shadow-2xl dark:text-white ${!context?.readMode && "text-white"}  ${colors.light} dark:bg-[#0d1426]/40 ${className} ${context?.readMode && reset}  `}>
 
-                <div className="relative  overflow-ellipsis flex justify-between p-2">
-                    <motion.h1 className="underline-offset-4 text-base ">{`${year}-${month}-${day}`}</motion.h1>
-                    <span  className="text-gray-600 select-none text-3xl">{poppedup ?
-                        <IoMdClose onClick={closeAction} className={"fill-red-600 dark:fill-amber-50"} /> : <AiOutlineDelete
+                <div className="relative  overflow-ellipsis flex justify-around p-2">
+                    <motion.h1 className="underline-offset-4 text-base ">{`${daysAgo} days old`}</motion.h1>
+                    <div className={"block"}>
+                        {!editing ?
+                            <motion.h1 className="underline-offset-4 text-xl ">{editTitle}</motion.h1>
+                            :
+                            <input value={editTitle} onInput={handleTitleChange}
+                                   ref={ref}
+                                   className={`dark:bg-black bg-inherit h-full w-full focus:outline-none border-2 p-2 border-amber-50 ${roundedxl} ${poppedup && "text-green-600 md:h-52"} `}></input>
+                        }
+                    </div>
+                    <span className="text-gray-600 select-none text-3xl">{poppedup ?
+                        <IoMdClose onClick={closeAction} className={"fill-red-600 dark:fill-amber-50"}/> :
+                        <AiOutlineDelete
                             onClick={deleteNote}
                             className={"fill-red-600 dark:fill-amber-50"}/>}</span>
                 </div>
@@ -208,15 +228,15 @@ export function Card({text,id, date, className, closeAction, poppedup = false, h
                 <div className="flex flex-row gap-3 text-base justify-between mb-3">
                     <button
                         onClick={() => copyToClipboard(editText)}
-                        className={`${colors.btn} text-sm  ${btn_double_border} blur-none z-20 text-white ${roundedlg} p-2 mt-4 dark:border-0 dark:hover:border-4 dark:border-white  dark:bg-inherit ${button_reset}  ${context?.glassy &&  colors.border }  `}>
+                        className={`${colors.btn} text-sm  ${btn_double_border} blur-none z-20 text-white ${roundedlg} p-2 mt-4 dark:border-0 dark:hover:border-4 dark:border-white  dark:bg-inherit ${button_reset}  ${context?.glassy && colors.border}  `}>
                         <BiCopy size={32}/>
                     </button>
                     <button
-                        className={`${colors.btn} text-sm  ${btn_double_border}  text-white ${roundedlg} p-2 mt-4 dark:border-0 dark:hover:border-4 dark:border-white dark:bg-inherit  ${button_reset}  ${context?.glassy &&  colors.border } `}>
-                        {editing ?  <span   onClick={updateNote}>Save <AiOutlineSave
+                        className={`${colors.btn} text-sm  ${btn_double_border}  text-white ${roundedlg} p-2 mt-4 dark:border-0 dark:hover:border-4 dark:border-white dark:bg-inherit  ${button_reset}  ${context?.glassy && colors.border} `}>
+                        {editing ? <span onClick={updateNote}>Save <AiOutlineSave
 
 
-                            className="inline"/> </span>: <MdOutlineModeEditOutline
+                            className="inline"/> </span> : <MdOutlineModeEditOutline
                             onClick={() => setEdit(!editing)}
                             className="inline w-8 h-6"/>}
                     </button>

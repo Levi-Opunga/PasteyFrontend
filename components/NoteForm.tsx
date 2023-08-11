@@ -9,8 +9,6 @@ import {BiCopy, BiCross} from "react-icons/bi";
 import useCopy from "use-copy";
 import {MdOutlineModeEditOutline} from "react-icons/md";
 import {createNote} from "@/components/ServerFunctions";
-import {Simulate} from "react-dom/test-utils";
-import toggle = Simulate.toggle;
 
 const backgrounds = [
     "bg-yellow-500/20",
@@ -62,11 +60,6 @@ const border = [
 ]
 
 
-export function randomBackground() {
-    let random = Math.floor(Math.random() * btn_backgrounds.length);
-    return btn_backgrounds[random]
-}
-
 
 const btn_backgrounds = [
     "bg-yellow-500/50",
@@ -110,7 +103,7 @@ export function NoteForm({className, closeAction, poppedup = true}: {
     const ref = useRef(null);
     const [copied, copy, setCopied] = useCopy(text);
     const [isPending, startTransition] = useTransition()
-
+const [title,setTitle] = useState("")
 
     let reset = 'bg-gray-100/50 dark:bg-[#0d1426] shadow-2xl dark:border-cyan-400 bg-white dark:border-[.5px]'
     let double_border = context?.dualBorder && 'border-double dark:border-double dark:border-gray-400/70 '
@@ -162,6 +155,7 @@ export function NoteForm({className, closeAction, poppedup = true}: {
                 id: Math.random()*10000000,
                 date: new Date().toISOString(),
                 hidden: hidden === "true",
+                title:title
             }).then(() => {
                 setText("");
                 context?.openModal("Note Created")
@@ -178,8 +172,14 @@ export function NoteForm({className, closeAction, poppedup = true}: {
         setHidden(value)
     }
 
-    return (
-        <form onSubmit={onSubmit} className={className}>
+    function handleTitleChange(event: React.ChangeEvent<HTMLInputElement>) {
+        event.preventDefault()
+        setTitle(event.target.value)
+    }
+
+
+
+    return (<form onSubmit={onSubmit} className={className}>
             <div
                 className={`border-[10px] select-none w-[100%]  ${roundedxxxl} ${context?.glassy ? colors.border : context?.readMode && "border-gray-700"}   ${context?.readMode && reset} ${double_border} ${context?.readMode && context.darkMode && context.roundedCorners && 'rounded-xl'} ${context?.readMode && context.darkMode && 'dark-card'} ${context?.glassy && context.darkMode && "shadow drop-shadow-2xl shadow-blue-950 "} ${context?.glassy&& !context?.darkMode && "text-gray-200" }  `}>
                 <motion.div
@@ -194,9 +194,19 @@ export function NoteForm({className, closeAction, poppedup = true}: {
                               className=" select-none text-3xl">
                         <IoMdClose className={`${!context?.darkMode && 'fill-red-500'}`}/> </span>
                     </div>
+                    <div className="h-12 m-1">
+                        <input
+                            placeholder={"Enter your title here"}
+                            type="text"
+                            className={`dark:bg-black bg-inherit w-full focus:outline-none border-2 p-2 ${context?.glassy && !context.darkMode ? colors.border : 'border-gray-700/80'} ${roundedxl} ${context?.darkMode && "text-green-600"}`}
+                        value={title}
+                        onChange={handleTitleChange}
+                        />
+                    </div>
                     <div className={`h-32 ${poppedup && 'h-52'} `}>
                         <textarea value={text} onInput={handleInputChange}
                                   ref={ref}
+                                  placeholder={"Enter your text here"}
                                   className={`dark:bg-black bg-inherit h-full w-full focus:outline-none border-2 p-2 ${context?.glassy && !context.darkMode ? colors.border : 'border-gray-700/80'} ${roundedxl} ${context?.darkMode && "text-green-600 md:h-52"}`}></textarea>
                     </div>
                     <div>
