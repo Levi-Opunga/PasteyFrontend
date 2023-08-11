@@ -51,7 +51,7 @@ export default function Home() {
 
     return (
         <main
-            className={`flex min-h-screen  w-screen  relative flex-col items-center gap-8 p-[5%] pt-8 ${context?.readMode && 'dark:bg-[#13111c] bg-slate-200/50 '} ${context?.darkMode && context.readMode && "night-hawk"}`}>
+            className={`flex min-h-screen relative flex-col items-center gap-8 p-[5%] pt-8 ${context?.readMode && 'dark:bg-[#13111c] bg-slate-200/50 '} ${context?.darkMode && context.readMode && "night-hawk"}`}>
             <motion.div animate={{x: 0, width: "initial", opacity: 1, scale: 1.8}}
                         whileHover={{scale: 1.2}}
                         onMouseEnter={() => setHovered(true)}
@@ -118,7 +118,7 @@ export default function Home() {
                 </>
             }
 
-            {!context?.readMode && <div className={` 2xl:mt-20 gap-8 w-fit  ${grids[context!.itemsPerRow]}  grid  `}>  {
+            {!context?.readMode && <div className={` 2xl:mt-20 gap-8  w-fit  ${grids[context!.itemsPerRow]}  grid  `}>  {
                 context?.notes.map((item, index) => {
                     return (
                         <motion.div

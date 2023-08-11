@@ -187,9 +187,9 @@ export function Card({text,id, date, className, closeAction, poppedup = false, h
     };
     return (
         <div
-            className={`border-[10px]  ${roundedxxxl} ${context?.glassy ? colors.border : context?.readMode && "border-gray-700"}  ${context?.readMode && reset } ${ double_border} ${context?.readMode && context.darkMode && context.roundedCorners && 'rounded-xl'} ${context?.readMode && context.darkMode && 'dark-card'} ${context?.glassy && context.darkMode && "shadow  shadow-blue-950 "}  `}>
+            className={`mx-[7%] w-[86%] md:mx-0 md:w-full border-[10px]  ${roundedxxxl} ${context?.glassy ? colors.border : context?.readMode && "border-gray-700"}  ${context?.readMode && reset } ${ double_border} ${context?.readMode && context.darkMode && context.roundedCorners && 'rounded-xl'} ${context?.readMode && context.darkMode && 'dark-card'} ${context?.glassy && context.darkMode && "shadow  shadow-blue-950 "}  `}>
             <motion.div
-                className={`w-full dark:text-gray-200 p-6  ${context?.glassy &&  colors.border + glassy}  dark:border-none  text-gray-700 ${roundedtxxl}  h-72 ${poppedup && "h-fit md:h-96"} ${hidden && context?.hideHidden && 'blur'}  shadow-2xl dark:text-white ${!context?.readMode && "text-white"}  ${colors.light} dark:bg-[#0d1426]/40 ${className} ${context?.readMode && reset}  `}>
+                className={`  w-full dark:text-gray-200 p-6  ${context?.glassy &&  colors.border + glassy}  dark:border-none  text-gray-700 ${roundedtxxl}  h-72 ${poppedup && "h-fit md:h-96"} ${hidden && context?.hideHidden && 'blur'}  shadow-2xl dark:text-white ${!context?.readMode && "text-white"}  ${colors.light} dark:bg-[#0d1426]/40 ${className} ${context?.readMode && reset}  `}>
 
                 <div className="relative  overflow-ellipsis flex justify-between p-2">
                     <motion.h1 className="underline-offset-4 text-base ">{`${year}-${month}-${day}`}</motion.h1>
