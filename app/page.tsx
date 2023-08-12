@@ -23,7 +23,6 @@ export default function Home() {
     const [isPending, startTransition] = useTransition()
 
     useEffect(() => {
-        console.log(context?.notes)
     }, [context]);
 
     let grids = [
@@ -50,7 +49,7 @@ export default function Home() {
     }
 
     return (
-        <main
+        <div
             className={`flex min-h-screen relative flex-col items-center gap-8 p-[5%] pt-8 ${context?.readMode && 'dark:bg-[#13111c] bg-slate-200/50 '} ${context?.darkMode && context.readMode && "night-hawk"}`}>
             <motion.div animate={{x: 0, width: "initial", opacity: 1, scale: 1.8}}
                         whileHover={{scale: 1.2}}
@@ -138,7 +137,7 @@ export default function Home() {
                                 <AnimatePresence>
                                     {
                                         <motion.div
-                                            key={index}
+                                            key={item.id}
                                             initial={{scale: 0}}
                                             animate={{scale: 1}}
                                             transition={{duration: 0.5}}
@@ -150,8 +149,10 @@ export default function Home() {
                                                      let res= await deleteNoteById(item.id)
                                                        res.message === "success" && context?.openModal("Note Deleted")
                                                     })
-                                                    context?.notes.splice(index, 1)
-                                                    context?.setNotes([...context?.notes])
+                                                    let array = [...context?.notes]
+                                                    array.splice(index, 1)
+                                                    console.log(array)
+                                                    context?.setNotes(array)
                                                 }}
                                                 {...item}  /></motion.div> ?? null}
                                 </AnimatePresence>
@@ -182,7 +183,7 @@ export default function Home() {
                                     <AnimatePresence>
                                         {
                                             <motion.div
-                                                key={index}
+                                                key={item.id}
                                                 initial={{scale: 0}}
                                                 animate={{scale: 1}}
                                                 transition={{duration: 0.5}}
@@ -190,8 +191,14 @@ export default function Home() {
                                                 <Card
                                                     closeAction={() => {
                                                         setSelectedId(null)
-                                                        context?.notes.splice(index, 1)
-                                                        context?.setNotes([...context?.notes])
+                                                        startTransition(async () => {
+                                                            let res= await deleteNoteById(item.id)
+                                                            res.message === "success" && context?.openModal("Note Deleted")
+                                                        })
+                                                        let array = [...context?.notes]
+                                                        array.splice(index, 1)
+                                                        console.log(array)
+                                                        context?.setNotes(array)
                                                     }}
                                                     {...item}  /></motion.div> ?? null}
                                     </AnimatePresence>
@@ -230,6 +237,6 @@ export default function Home() {
 
             }
             <Footer/>
-        </main>
+        </div>
     )
 }

@@ -14,7 +14,7 @@ interface Context {
     setUser: (user: User | null) => void;
     getUser: () => User | null;
     notes: Note[];
-    setNotes: (notes: Note[]) => void;
+    setNotes: React.Dispatch<React.SetStateAction<Note[]>>;
     refreshNotes: () => void;
     darkMode: boolean;
     setdarkMode: () => void;
@@ -44,7 +44,7 @@ function Modal(props: { closeModal: () => void, message: string }) {
             props.closeModal()
         }, 1200)
     }, [])
-    return <div className="fixed top-0 z-50 left-0 w-full h-full bg-gray-400/10 ">
+    return <main className="fixed top-0 z-50 left-0 w-full h-full bg-gray-400/10 ">
         <motion.div
             animate={{x: 0}}
             initial={{x: 500}}
@@ -56,7 +56,7 @@ function Modal(props: { closeModal: () => void, message: string }) {
             {/*    <button onClick={props.closeModal} className="bg-blue-400 p-2 rounded-2xl">Close</button>*/}
             {/*</div>*/}
         </motion.div>
-    </div>;
+    </main>;
 
 }
 
@@ -91,6 +91,7 @@ export function AppWrapper({children}: { children: React.ReactNode }) {
 
     }
 
+
     useEffect(() => {
         const darkMode = localStorage.getItem("darkMode")
         const glassy = localStorage.getItem("glassy")
@@ -111,7 +112,6 @@ export function AppWrapper({children}: { children: React.ReactNode }) {
         }
         if (localStorage.getItem("readMode") === "true") {
             setReadMode(true)
-            console.log("readMode", true)
         } else {
             setReadMode(false)
         }
@@ -153,7 +153,6 @@ export function AppWrapper({children}: { children: React.ReactNode }) {
     function toggleRoundedCorners() {
         localStorage.setItem("roundedCorners", (!roundedCorners).toString())
         setRoundedCorners(!roundedCorners)
-        console.log("roundedCorners", roundedCorners);
     }
 
     function setlightMode() {
@@ -165,7 +164,6 @@ export function AppWrapper({children}: { children: React.ReactNode }) {
     function togglereadMode() {
         localStorage.setItem("readMode", (!readMode).toString())
         setReadMode(!readMode)
-        console.log(readMode)
     }
 
     function setdarkMode() {

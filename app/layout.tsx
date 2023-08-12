@@ -17,11 +17,13 @@ export default function RootLayout({
 }) {
   return (
     <html className="dark  " lang="en">
-      <AppWrapper>
         <body className={inter.className + " dark:bg-[#0B132B] "}>
-          {children}
+        <AppWrapper>
+
+        {children}
+        </AppWrapper>
+
         </body>
-      </AppWrapper>
     </html>
   );
 }

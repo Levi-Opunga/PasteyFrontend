@@ -1,11 +1,10 @@
 "use client"
 import {motion} from "framer-motion";
-import {CiEdit} from "react-icons/ci";
-import React, {useCallback, useContext, useEffect, useMemo, useRef, useState} from "react";
-import {AppContext, AppWrapper} from "@/app/AppContext";
-import {AiFillCopy, AiFillDelete, AiOutlineDelete, AiOutlineSave} from "react-icons/ai";
+import React, {useCallback, useContext, useMemo, useRef, useState} from "react";
+import {AppContext} from "@/app/AppContext";
+import {AiOutlineDelete, AiOutlineSave} from "react-icons/ai";
 import {IoMdClose} from "react-icons/io";
-import {BiCopy, BiCross} from "react-icons/bi";
+import {BiCopy} from "react-icons/bi";
 import useCopy from "use-copy";
 import {MdOutlineModeEditOutline} from "react-icons/md";
 import {deleteNoteById, updateNoteById} from "@/components/ServerFunctions";
@@ -100,7 +99,14 @@ const backgrounds_border = [
 ]
 
 export function Card({text, title, id, date, className, closeAction, poppedup = false, hidden}: {
-    text: string, title: string, id: number, date: string, className?: string, closeAction?: () => void, poppedup?: boolean, hidden?: boolean
+    text: string,
+    title: string,
+    id: number,
+    date: string,
+    className?: string,
+    closeAction?: () => void,
+    poppedup?: boolean,
+    hidden?: boolean
 }) {
     const context = useContext(AppContext);
     const [editText, setEditText] = useState(text);
@@ -182,11 +188,9 @@ export function Card({text, title, id, date, className, closeAction, poppedup = 
         setEdit(!editing)
     }
 
-    const deleteNote = () => {
-        context?.setNotes(context!.notes.filter(item => item.id !== id))
+    const deleteNote = async () => {
         deleteNoteById(id)
         context?.openModal("Note Deleted")
-
     };
 
     function handleTitleChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -197,35 +201,36 @@ export function Card({text, title, id, date, className, closeAction, poppedup = 
 
     return (
         <div
-            className={`mx-[7%] w-[86%] md:mx-0 md:w-full border-[10px]  ${roundedxxxl} ${context?.glassy ? colors.border : context?.readMode && "border-gray-700"}  ${context?.readMode && reset} ${double_border} ${context?.readMode && context.darkMode && context.roundedCorners && 'rounded-xl'} ${context?.readMode && context.darkMode && 'dark-card'} ${context?.glassy && context.darkMode && "shadow  shadow-blue-950 "}  `}>
+            className={`mx-[7%] w-[86%] md:min-w-[200px] md:mx-0 md:w-full border-[10px]  ${roundedxxxl} ${context?.glassy ? colors.border : context?.readMode && "border-gray-700"}  ${context?.readMode && reset} ${double_border} ${context?.readMode && context.darkMode && context.roundedCorners && 'rounded-xl'} ${context?.readMode && context.darkMode && 'dark-card'} ${context?.glassy && context.darkMode && "shadow  shadow-blue-950 "}  `}>
             <motion.div
-                className={`  w-full dark:text-gray-200 p-6  ${context?.glassy && colors.border + glassy}  dark:border-none  text-gray-700 ${roundedtxxl}  h-72 ${poppedup && "h-fit md:h-96"} ${hidden && context?.hideHidden && 'blur'}  shadow-2xl dark:text-white ${!context?.readMode && "text-white"}  ${colors.light} dark:bg-[#0d1426]/40 ${className} ${context?.readMode && reset}  `}>
+                className={`  w-full dark:text-gray-200 p-4  ${context?.glassy && colors.border + glassy}  dark:border-none  text-gray-700 ${roundedtxxl}  h-72 ${poppedup && "h-fit md:h-96"} ${hidden && context?.hideHidden && 'blur'}  shadow-2xl dark:text-white ${!context?.readMode && "text-white"}  ${colors.light} dark:bg-[#0d1426]/40 ${className} ${context?.readMode && reset}  `}>
 
-                <div className="relative  overflow-ellipsis flex justify-around p-2">
-                    <motion.h1 className="underline-offset-4 text-base ">{`${daysAgo} days old`}</motion.h1>
-                    <div className={"block"}>
-                        {!editing ?
-                            <motion.h1 className="underline-offset-4 text-xl ">{editTitle}</motion.h1>
-                            :
-                            <input value={editTitle} onInput={handleTitleChange}
-                                   ref={ref}
-                                   className={`dark:bg-black bg-inherit h-full w-full focus:outline-none border-2 p-2 border-amber-50 ${roundedxl} ${poppedup && "text-green-600 md:h-52"} `}></input>
-                        }
-                    </div>
+                <div className="relative  overflow-ellipsis flex justify-between p-2">
+                    <motion.h1 className="underline-offset-4 font-bold text-base ">{`${daysAgo} days`}</motion.h1>
+
                     <span className="text-gray-600 select-none text-3xl">{poppedup ?
                         <IoMdClose onClick={closeAction} className={"fill-red-600 dark:fill-amber-50"}/> :
                         <AiOutlineDelete
-                            onClick={deleteNote}
+                            onClick={closeAction}
                             className={"fill-red-600 dark:fill-amber-50"}/>}</span>
                 </div>
-                <div className={`h-32 ${poppedup && 'h-56'} `}>
+                <div className={""}>
                     {!editing ?
-                        <p className={`md:text-xl text-base line-clamp-4 ${poppedup && "line-clamp-6 md:h-56"}`}>{editText}</p> :
+                        <motion.h1 className=" font-bold text-xl ">{editTitle}</motion.h1>
+                        :
+                        <input value={editTitle} onInput={handleTitleChange}
+                               ref={ref}
+                               className={`dark:bg-black bg-inherit h-full w-full focus:outline-none border-2 p-2 border-amber-50 ${roundedxl} ${poppedup && "text-green-600 md:h-52"} `}></input>
+                    }
+                </div>
+                <div className={`h-28 ${poppedup && 'h-56'} `}>
+                    {!editing ?
+                        <p className={`md:text-base text-base line-clamp-4 ${poppedup && "line-clamp-6 md:h-56"}`}>{editText}</p> :
                         <textarea value={editText} onInput={handleInputChange}
                                   ref={ref}
                                   className={`dark:bg-black bg-inherit h-full w-full focus:outline-none border-2 p-2 border-amber-50 ${roundedxl} ${poppedup && "text-green-600 md:h-52"} `}></textarea>}
                 </div>
-                <div className="flex flex-row gap-3 text-base justify-between mb-3">
+                <div className="flex flex-row gap-3 text-base justify-between pb-3">
                     <button
                         onClick={() => copyToClipboard(editText)}
                         className={`${colors.btn} text-sm  ${btn_double_border} blur-none z-20 text-white ${roundedlg} p-2 mt-4 dark:border-0 dark:hover:border-4 dark:border-white  dark:bg-inherit ${button_reset}  ${context?.glassy && colors.border}  `}>
