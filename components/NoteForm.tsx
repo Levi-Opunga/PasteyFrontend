@@ -183,7 +183,7 @@ const [title,setTitle] = useState("")
             <div
                 className={`border-[10px] select-none w-[100%]  ${roundedxxxl} ${context?.glassy ? colors.border : context?.readMode && "border-gray-700"}   ${context?.readMode && reset} ${double_border} ${context?.readMode && context.darkMode && context.roundedCorners && 'rounded-xl'} ${context?.readMode && context.darkMode && 'dark-card'} ${context?.glassy && context.darkMode && "shadow drop-shadow-2xl shadow-blue-950 "} ${context?.glassy&& !context?.darkMode && "text-gray-200" }  `}>
                 <motion.div
-                    className={`w-full dark:text-gray-200 p-6 w-[100%]   ${context?.glassy && colors.border + glassy}  dark:border-none   ${roundedtxxl}  h-fit ${poppedup && "md:h-96"}  shadow-2xl dark:text-white  ${colors.light} dark:bg-[#0d1426]/80 ${className} ${context?.readMode && reset} `}>
+                    className={`w-full dark:text-gray-200 p-6 w-[100%]   ${context?.glassy && colors.border + glassy}  dark:border-none   ${roundedtxxl}  h-fit ${poppedup && "md:h-fit"}  shadow-2xl dark:text-white  ${colors.light} dark:bg-[#0d1426]/80 ${className} ${context?.readMode && reset} `}>
 
                     <div className="relative  overflow-ellipsis flex justify-between p-2">
                         <motion.h1 className="underline-offset-4 text-base  ">Enter New Clip</motion.h1>

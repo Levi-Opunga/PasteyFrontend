@@ -216,7 +216,7 @@ export default function Home() {
                         >
                             <motion.div
                                 initial={{opacity: 0, y: initialCoordinates.y, x: initialCoordinates.x}}
-                                animate={{opacity: 1, y: "50%", x: "15%", scale: 1}}
+                                animate={{opacity: 1, y: "35%", x: "15%", scale: 1}}
                                 exit={{opacity: 0, y: initialCoordinates.y, x: initialCoordinates.x}}
                                 transition={{delay: 0.1}}
                                 className=" w-[80%]">
